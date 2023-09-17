@@ -17,11 +17,20 @@
       enctype="multipart/form-data"
     >
       <h1>Login</h1>
-      <input type="text" name="" placeholder="Username" />
-      <input type="password" name="" placeholder="Password" />
-      <input type="submit" name="" placeholder="Login" />
+      <input type="text" name="username" placeholder="Username" id="username" />
+      <input type="password" name="password" placeholder="Password" id="password"/>
+      <input type="submit" name="" placeholder="Login" onclick="greet" />
+      
       <div class="signup-link">Not a member? <a href="sign up.html">Sign up</a></div>
     </form>
     </section>
+
+    <script>
+      function greet()
+     {
+      alert("Logged In Successfully......")
+     }    
+     </script>
+
   </body>
 </html>

@@ -11,6 +11,7 @@
     <div class="wrapper">
       <section class="form signup">
         <form
+        id="container"
           action=""
           method="POST"
           enctype="multipart/form-data"
@@ -18,28 +19,28 @@
           <header>Sign Up</header>
           <div class="name details">
             <div class="field input">
-              <label>First Name :</label>
-              <input type="text" name="fname" placeholder="ram" />
+              <label>User Name :</label>
+              <input type="text" name="username" placeholder="username" id="username" />
             </div>
-            <div class="field input">
+            <!-- <div class="field input">
               <label>Last Name :</label>
               <input type="text" name="lname" placeholder="singh" />
-            </div>
+            </div> -->
             <div class="field input">
               <label>Email :</label>
-              <input type="text" name="email" placeholder="@gmail.com" />
+              <input type="text" name="email" placeholder="@gmail.com" id="email" />
             </div>
             <div class="field input">
               <label>Password :</label>
-              <input type="text" name="password" placeholder="abc123" />
+              <input type="text" name="password" placeholder="abc123"  id="password"/>
             </div>
 
-            <!-- <div class="field image">
+            <!--<div class="field image">
               <label>Select Image</label>
               <input type="file">
             </div> -->
             <div class="field button">
-              <input type="submit" name="submit" value="Sign Up" href="index.html"/>
+              <input type="submit" name="signUp" value="Sign Up" id="signUp" onclick="greet()"/>
             </div>
             <div class="link">
               Already Signed up? <a href="Login.html">Login</a>
@@ -48,5 +49,64 @@
         </form>
       </section>
     </div>
+
+    <script>
+      function greet()
+     {
+      alert("Signed In Successfully.....")
+     }    
+     </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
+
   </body>
+
+  
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.19.0/firebase-app.js";
+    import { getDatabase } from "https://www.gstatic.com/firebasejs/9.19.0/firebase-database.js";
+    import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.19.0/firebase-auth.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+  
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyChE_0ATE_yIKF8JG1OdKEVqGnu-8_poPM",
+      authDomain: "delivery-app-4cfb8.firebaseapp.com",
+      databaseURL: "https://delivery-app-4cfb8-default-rtdb.firebaseio.com",
+      projectId: "delivery-app-4cfb8",
+      storageBucket: "delivery-app-4cfb8.appspot.com",
+      messagingSenderId: "562084294631",
+      appId: "1:562084294631:web:de0ca678900e03a5709742"
+    };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+    const auth = getAuth(); 
+
+    signUp.addEventListener('click',(e) =>{
+      
+      var email = document.getElementById(['email']).value;
+      var password = document.getElementById(['password']).value;
+      var username = document.getElementById(['username']).value;
+
+createUserWithEmailAndPassword(auth, email, password)
+.then((userCredential) => {
+  // Signed in 
+  const user = userCredential.user;
+  alert('User Created')
+  // ...
+})
+.catch((error) => {
+  const errorCode = error.code;
+  const errorMessage = error.message;
+  alert(errorMessage)
+  // ..
+});
+    });
+  </script>
+  <script src="connect.js"></script>
+  
 </html>
